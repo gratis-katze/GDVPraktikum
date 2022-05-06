@@ -1,5 +1,6 @@
 // GD-Praktikum:   teil_1.cpp  (Teil 1: Start-Programm)
 // Hergenroether / Groch    Last Update: 05.07.2014
+#define GL_SILENCE_DEPRECATION
 
 #include <iostream>
 //#include <GL/freeglut.h>         //lädt alles für OpenGL
@@ -13,11 +14,112 @@ void Init()
     glEnable (GL_CULL_FACE) ;
     glFrontFace (GL_CCW) ;
     glCullFace ( GL_BACK ) ;
-
 }
 
 void createFelix(){
+    //F
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.0, 1.0, 0.0);
+    glVertex3f(0.0, 0.5, 0.0);
+    glVertex3f(0.1, 1.0, 0.0);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.0, 0.5, 0.0);
+    glVertex3f(0.1, 0.5, 0.0);
+    glVertex3f(0.1, 1.0, 0.0);
+    glEnd();
 
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.1, 1.0, 0.0);
+    glVertex3f(0.1, 0.9, 0.0);
+    glVertex3f(0.4, 1.0, 0.0);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.1, 0.9, 0.0);
+    glVertex3f(0.4, 0.9, 0.0);
+    glVertex3f(0.4, 1.0, 0.0);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.1, 0.8, 0.0);
+    glVertex3f(0.1, 0.7, 0.0);
+    glVertex3f(0.4, 0.8, 0.0);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.1, 0.7, 0.0);
+    glVertex3f(0.4, 0.7, 0.0);
+    glVertex3f(0.4, 0.8, 0.0);
+    glEnd();
+
+    // R
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.5, 1.0, 0.0);
+    glVertex3f(0.5, 0.5, 0.0);
+    glVertex3f(0.6, 1.0, 0.0);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.5, 0.5, 0.0);
+    glVertex3f(0.6, 0.5, 0.0);
+    glVertex3f(0.6, 1.0, 0.0);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.6, 1.0, 0.0);
+    glVertex3f(0.6, 0.9, 0.0);
+    glVertex3f(0.9, 1.0, 0.0);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.6, 0.9, 0.0);
+    glVertex3f(0.9, 0.9, 0.0);
+    glVertex3f(0.9, 1.0, 0.0);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.6, 0.8, 0.0);
+    glVertex3f(0.6, 0.7, 0.0);
+    glVertex3f(0.9, 0.8, 0.0);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.6, 0.7, 0.0);
+    glVertex3f(0.9, 0.7, 0.0);
+    glVertex3f(0.9, 0.8, 0.0);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.8, 1.0, 0.0);
+    glVertex3f(0.8, 0.7, 0.0);
+    glVertex3f(0.9, 1.0, 0.0);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.8, 0.7, 0.0);
+    glVertex3f(0.9, 0.7, 0.0);
+    glVertex3f(0.9, 1.0, 0.0);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.9, 0.5, 0.0);
+    glVertex3f(1.0, 0.5, 0.0);
+    glVertex3f(1.0, 0.8, 0.0);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glVertex3f(0.9, 0.8, 0.0);
+    glVertex3f(0.9, 0.5, 0.0);
+    glVertex3f(1.0, 0.8, 0.0);
+    glEnd();
+
+}
+void createQuad() {
+    glBegin( GL_POLYGON );	// bestimmt Eckpunktestart
+    glColor4f( 1.0, 0.0, 0.0, 1.0);
+    //glColor4f(GLUT_RED, GLUT_GREEN, GLUT_BLUE, GLUT_ALPHA);          //-> meine addition
+    glVertex3f( -0.5, -0.5, -0.5 );  //-> positionen im Koordinatensystem
+    glColor4f(0.0, 0.0,1.0, 1.0);
+    glVertex3f(  0.5, -0.5, -0.5 );
+    glColor4f(0.0, 0.0, 1.0, 1.0);
+    glVertex3f(  0.5,  0.5, -0.5 );
+    glColor4f( 0.0, 0.0, 1.0, 1.0);
+    glVertex3f( -0.5,  0.5, -0.5 );
+    glEnd();                 // bestimmt Eckpunkteende
 }
 void createKonrad() {
     //mein Namen
@@ -75,23 +177,14 @@ void createKonrad() {
 
 }
 void RenderScene() {    //Zeichenfunktion
+
     glClearColor(1.0, 1.0, 0.0, 1.0); //->zuerst Fearben .. dann ausfuehren
     glClear(GL_COLOR_BUFFER_BIT);
     // Hier befindet sich der Code der in jedem Frame ausgefuehrt werden muss
     glLoadIdentity ();   // Aktuelle Model-/View-Transformations-Matrix zuruecksetzen
-    glBegin( GL_POLYGON );	// bestimmt Eckpunktestart
-    glColor4f( 1.0, 0.0, 0.0, 1.0);
-    //glColor4f(GLUT_RED, GLUT_GREEN, GLUT_BLUE, GLUT_ALPHA);          //-> meine addition
-    glVertex3f( -0.5, -0.5, -0.5 );  //-> positionen im Koordinatensystem
-    glColor4f(0.0, 0.0,1.0, 1.0);
-    glVertex3f(  0.5, -0.5, -0.5 );
-    glColor4f(0.0, 0.0, 1.0, 1.0);
-    glVertex3f(  0.5,  0.5, -0.5 );
-    glColor4f( 0.0, 0.0, 1.0, 1.0);
-    glVertex3f( -0.5,  0.5, -0.5 );
-    glEnd();                 // bestimmt Eckpunkteende
-
+    createQuad();
     createKonrad();
+    createFelix();
     glutSwapBuffers();
 
 }
@@ -101,7 +194,6 @@ void Reshape(int width,int height)
     // Hier finden die Reaktionen auf eine Veränderung der Größe des
     // Graphikfensters statt
 }
-
 void Animate (int value)
 {
     // Hier werden Berechnungen durchgeführt, die zu einer Animation der Szene
@@ -115,7 +207,6 @@ void Animate (int value)
     int wait_msec = 10;
     glutTimerFunc(wait_msec, Animate, ++value);
 }
-
 int main(int argc, char **argv)
 {
     glutInit( &argc, argv );                // GLUT initialisieren
