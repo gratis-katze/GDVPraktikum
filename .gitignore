@@ -1,11 +1,21 @@
 # Prerequisites
 *.d
 
-# Compiled Object files
+
+
+Compiled Object files
 *.slo
 *.lo
 *.o
 *.obj
+
+
+.DS_Store
+.gitignore.swp
+.idea/
+
+
+
 
 # Precompiled Headers
 *.gch

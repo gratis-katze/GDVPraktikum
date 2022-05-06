@@ -1,0 +1,4 @@
+/Users/felix/CLionProjects/GDV/cmake-build-debug/CMakeFiles/GDV.dir
+/Users/felix/CLionProjects/GDV/cmake-build-debug/CMakeFiles/untitled.dir
+/Users/felix/CLionProjects/GDV/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/felix/CLionProjects/GDV/cmake-build-debug/CMakeFiles/rebuild_cache.dir
