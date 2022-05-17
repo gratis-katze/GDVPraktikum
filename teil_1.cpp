@@ -28,12 +28,6 @@ void RenderScene() {
     gluPerspective(1,1,1,1);
     gluLookAt(0.1,0.1,0.5,0,0.0,0.0,0,0.1,0);
     herbie.createRobot();
-    //herbie.rotateLeftLeg(45,0,0,0);
-
-    /*
-    Wuerfel body = Wuerfel(0.3,0.6,0.1,    1,1,1,  0,0,0,    45,0,0,0);
-    body.create();
-    */
 
     glutSwapBuffers();
 }
@@ -45,12 +39,10 @@ void Animate (int value)
     // inkrementiert und dem Callback wieder uebergeben.
     std::cout << "value=" << value << std::endl;
 
+    herbie.rotateLeftLeg(45,0,0,0);
+
     // RenderScene aufrufen
     glutPostRedisplay();
-    /*
-    glFlush();
-    glutSwapBuffers();
-     */
     // Timer wieder registrieren - Animate wird so nach 10 msec mit value+=1 aufgerufen.
     int wait_msec = 10;
     glutTimerFunc(wait_msec, Animate, ++value);
