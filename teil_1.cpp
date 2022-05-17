@@ -6,6 +6,10 @@
 //#include <GL/freeglut.h>         //lädt alles für OpenGL
 #include <OpenGL/gl.h>
 #include <GLUT/glut.h>
+#include "Wuerfel.h"
+#include "Robot.h"
+
+//Robot herbie;
 
 void Init()
 {
@@ -15,6 +19,62 @@ void Init()
     glFrontFace (GL_CCW) ;
     glCullFace ( GL_BACK ) ;
 }
+void RenderScene() {
+
+    //glClearColor(1.0, 1.0, 0.0, 1.0); //->zuerst Fearben .. dann ausfuehren
+    glClear(GL_COLOR_BUFFER_BIT);
+    // Hier befindet sich der Code der in jedem Frame ausgefuehrt werden muss
+    glLoadIdentity ();   // Aktuelle Model-/View-Transformations-Matrix zuruecksetzen
+       gluPerspective(1,1,1,1);
+       gluLookAt(0.1,0.1,0.5,0,0.0,0.0,0,0.1,0);
+    /*
+          Robot herbie = Robot();
+          herbie.createRobot();
+           */
+    //herbie.rotateLeftLeg(45,0,0,0);
+
+    Wuerfel body = Wuerfel(0.3,0.6,0.1,    1,1,1,  0,0,0,    45,0,0,0);
+    body.create();
+
+
+}
+void Animate (int value)
+{
+    // Hier werden Berechnungen durchgeführt, die zu einer Animation der Szene
+    // erforderlich sind. Dieser Prozess läuft im Hintergrund und wird alle
+    // 1000 msec aufgerufen. Der Parameter "value" wird einfach nur um eins
+    // inkrementiert und dem Callback wieder uebergeben.
+    std::cout << "value=" << value << std::endl;
+
+    // RenderScene aufrufen
+    glutPostRedisplay();
+    /*
+    glFlush();
+    glutSwapBuffers();
+     */
+    // Timer wieder registrieren - Animate wird so nach 10 msec mit value+=1 aufgerufen.
+    int wait_msec = 10;
+    glutTimerFunc(wait_msec, Animate, ++value);
+}
+int main(int argc, char **argv)
+{
+    glutInit( &argc, argv );                // GLUT initialisieren
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB );
+    glutInitWindowSize( 600, 600 );         // Fenster-Konfiguration
+    glutCreateWindow( "KonradMucha; FelixRuff" );   // Fenster-Erzeugung
+    glutDisplayFunc( RenderScene );         // Zeichenfunktion bekannt machen
+    Init();
+
+    //glutReshapeFunc( Reshape );
+    // TimerCallback registrieren; wird nach 10 msec aufgerufen mit Parameter 0
+    //glutTimerFunc( 10, Animate, 0);
+
+    glutMainLoop();
+    return 0;
+}
+
+
+
 
 void createFelix(){
     //F
@@ -176,48 +236,56 @@ void createKonrad() {
 
 
 }
-void RenderScene() {    //Zeichenfunktion
+void createRobot() {
+    //gluOrtho2D(-10,10,-10,10); // not needed!?
 
-    glClearColor(1.0, 1.0, 0.0, 1.0); //->zuerst Fearben .. dann ausfuehren
-    glClear(GL_COLOR_BUFFER_BIT);
-    // Hier befindet sich der Code der in jedem Frame ausgefuehrt werden muss
-    glLoadIdentity ();   // Aktuelle Model-/View-Transformations-Matrix zuruecksetzen
-    createQuad();
-    createKonrad();
-    createFelix();
-    glutSwapBuffers();
+    //
+    // body
+    //
+    Wuerfel body = Wuerfel(0.3,0.6,0.1,    1,1,1,  0,0,0,    0,0,0,0);
+    //
+    // head
+    //
+    Wuerfel head = Wuerfel(0.2,0.2,0.2,    1,1,1,  0,0.45,0,    0,0,0,0);
+
+    //
+    // right arm
+    //
+    Wuerfel(0.25,0.1,0.1,    1,1,1,  0.325,0.2,0,    0,0,0,0);
+    //
+    // right under arm
+    //
+    Wuerfel(0.25,0.1,0.1,    1,1,1,  0.625,0.2,0,    0,0,0,0);
+    //
+    // left arm
+    //
+    Wuerfel(0.25,0.1,0.1,    1,1,1,  -0.325,0.2,0,    0,0,0,0);
+    //
+    // left under arm
+    //
+    Wuerfel(0.25,0.1,0.1,    1,1,1,  -0.625,0.2,0,    0,0,0,0);
+
+    //
+    // right leg
+    //
+    Wuerfel(0.1,0.35,0.1,    1,1,1,  0.1,-0.525,0,    0,0,0,0);
+    //
+    // left leg
+    //
+    Wuerfel(0.1,0.35,0.1,    1,1,1,  -0.1,-0.525,0,    0,0,0,0);
+    //
+    // hat
+    //
+    Wuerfel(0.3,0.1,0.1,    1,1,1,  0,0.65,0,    0,0,0,0);
+    Wuerfel(0.1,0.15,0.1,    1,1,1,  0,0.75,0,    0,0,0,0);
+
+
+    //
+
 
 }
-
 void Reshape(int width,int height)
 {
     // Hier finden die Reaktionen auf eine Veränderung der Größe des
     // Graphikfensters statt
-}
-void Animate (int value)
-{
-    // Hier werden Berechnungen durchgeführt, die zu einer Animation der Szene
-    // erforderlich sind. Dieser Prozess läuft im Hintergrund und wird alle
-    // 1000 msec aufgerufen. Der Parameter "value" wird einfach nur um eins
-    // inkrementiert und dem Callback wieder uebergeben.
-    std::cout << "value=" << value << std::endl;
-    // RenderScene aufrufen
-    glutPostRedisplay();
-    // Timer wieder registrieren - Animate wird so nach 10 msec mit value+=1 aufgerufen.
-    int wait_msec = 10;
-    glutTimerFunc(wait_msec, Animate, ++value);
-}
-int main(int argc, char **argv)
-{
-    glutInit( &argc, argv );                // GLUT initialisieren
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB );
-    glutInitWindowSize( 600, 600 );         // Fenster-Konfiguration
-    glutCreateWindow( "KonradMucha; FelixRuff" );   // Fenster-Erzeugung
-    glutDisplayFunc( RenderScene );         // Zeichenfunktion bekannt machen
-    glutReshapeFunc( Reshape );
-    // TimerCallback registrieren; wird nach 10 msec aufgerufen mit Parameter 0
-    glutTimerFunc( 10, Animate, 0);
-    Init();
-    glutMainLoop();
-    return 0;
 }

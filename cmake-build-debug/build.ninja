@@ -61,6 +61,12 @@ build CMakeFiles/GDV.dir/teil_1.cpp.o: CXX_COMPILER__GDV_Debug /Users/felix/CLio
   OBJECT_DIR = CMakeFiles/GDV.dir
   OBJECT_FILE_DIR = CMakeFiles/GDV.dir
 
+build CMakeFiles/GDV.dir/Wuerfel.cpp.o: CXX_COMPILER__GDV_Debug /Users/felix/CLionProjects/GDV/Wuerfel.cpp || cmake_object_order_depends_target_GDV
+  DEP_FILE = CMakeFiles/GDV.dir/Wuerfel.cpp.o.d
+  FLAGS = -std=c++11 -framework GLUT -framework OpenGL -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.1 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/GDV.dir
+  OBJECT_FILE_DIR = CMakeFiles/GDV.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target GDV
@@ -69,7 +75,7 @@ build CMakeFiles/GDV.dir/teil_1.cpp.o: CXX_COMPILER__GDV_Debug /Users/felix/CLio
 #############################################
 # Link the executable GDV
 
-build GDV: CXX_EXECUTABLE_LINKER__GDV_Debug CMakeFiles/GDV.dir/main.cpp.o CMakeFiles/GDV.dir/teil_1.cpp.o
+build GDV: CXX_EXECUTABLE_LINKER__GDV_Debug CMakeFiles/GDV.dir/main.cpp.o CMakeFiles/GDV.dir/teil_1.cpp.o CMakeFiles/GDV.dir/Wuerfel.cpp.o
   FLAGS = -std=c++11 -framework GLUT -framework OpenGL -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.1
   OBJECT_DIR = CMakeFiles/GDV.dir
   POST_BUILD = :
