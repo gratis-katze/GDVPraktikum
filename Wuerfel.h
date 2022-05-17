@@ -39,7 +39,6 @@ class Wuerfel {
             rotateX = rotateXX;
             rotateY = rotateYY;
             rotateZ = rotateZZ;
-            create();
         }
         void create( ) const  {
 

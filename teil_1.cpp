@@ -9,7 +9,7 @@
 #include "Wuerfel.h"
 #include "Robot.h"
 
-//Robot herbie;
+Robot herbie = Robot();
 
 void Init()
 {
@@ -25,18 +25,17 @@ void RenderScene() {
     glClear(GL_COLOR_BUFFER_BIT);
     // Hier befindet sich der Code der in jedem Frame ausgefuehrt werden muss
     glLoadIdentity ();   // Aktuelle Model-/View-Transformations-Matrix zuruecksetzen
-       gluPerspective(1,1,1,1);
-       gluLookAt(0.1,0.1,0.5,0,0.0,0.0,0,0.1,0);
-    /*
-          Robot herbie = Robot();
-          herbie.createRobot();
-           */
+    gluPerspective(1,1,1,1);
+    gluLookAt(0.1,0.1,0.5,0,0.0,0.0,0,0.1,0);
+    herbie.createRobot();
     //herbie.rotateLeftLeg(45,0,0,0);
 
+    /*
     Wuerfel body = Wuerfel(0.3,0.6,0.1,    1,1,1,  0,0,0,    45,0,0,0);
     body.create();
+    */
 
-
+    glutSwapBuffers();
 }
 void Animate (int value)
 {

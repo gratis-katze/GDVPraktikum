@@ -53,7 +53,6 @@ public:
 
     }
     void createRobot() {
-        /*
         //
         // body
         //
@@ -141,8 +140,6 @@ public:
                 hat2.translX,hat2.translY,hat2.translZ,
                 hat2.rotateAngle,hat2.rotateX,hat2.rotateY,hat2.rotateZ
         ); hat2.create();
-         */
-        body.create();
     }
     void rotateLeftLeg(double ang, double xx, double yy, double zz) {
         leftLeg.rotate(ang,xx,yy,zz);
