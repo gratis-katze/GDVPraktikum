@@ -10,6 +10,10 @@
 #include "Robot.h"
 
 Robot herbie = Robot();
+Wuerfel test = Wuerfel(0.2,0.2,0.2, 0.5,0.5,0.5,  0,0,0,  0,0,0,0);
+Wuerfel test2 = Wuerfel(0.2,0.2,0.2, 1,1,1,  0.5,0,0,  0,0,0,0);
+int tmp = 0;
+double tmps[3];
 
 void Init()
 {
@@ -28,7 +32,11 @@ void RenderScene() {
     gluPerspective(1,1,1,1);
     gluLookAt(0.1,0.1,0.5,0,0.0,0.0,0,0.1,0);
     herbie.createRobot();
-
+    herbie.rotateRobot(0.0,0,0,5);
+    //glScalef(0.6,0.6,0.6);
+    //glPushMatrix();
+    //test.create();test2.create();
+    //glPopMatrix();
     glutSwapBuffers();
 }
 void Animate (int value)
@@ -39,9 +47,27 @@ void Animate (int value)
     // inkrementiert und dem Callback wieder uebergeben.
     std::cout << "value=" << value << std::endl;
 
-    herbie.rotateRightArm(value,0,0,1);
-    //herbie.rotateRobot(value,0,0,0);
-
+    //herbie.rotateLeftLeg(value,0,0,0);
+    herbie.walk();
+    herbie.rotateHead(value,0,1,0);
+    herbie.rotateLeftArm(value,0,0,1);
+    /*
+    if ( tmp == 0 ) {
+        tmps[0] = herbie.leftArmTranslate[0];
+        tmps[1] = herbie.leftArmTranslate[1];
+        tmps[2] = herbie.leftArmTranslate[2];
+        herbie.translateLeftArm(0,0,0);
+    }
+    if ( tmp == 1 ) {
+        herbie.rotateLeftArm(value,0,0,0);
+    }
+    if ( tmp == 2 ) {
+        herbie.translateLeftArm(tmps[0],tmps[1],tmps[2]);
+    }
+    ++tmp;
+    if (tmp > 2) {
+        tmp = 0;
+    }*/
     // RenderScene aufrufen
     glutPostRedisplay();
     // Timer wieder registrieren - Animate wird so nach 10 msec mit value+=1 aufgerufen.

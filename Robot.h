@@ -9,19 +9,11 @@
 #include "Wuerfel.h"
 
 class Robot {
+    int walkCounter = 0;
+    bool walkForward = true;
+
 public:
     Robot() {
-        wuerfelArray[0] = &body;
-        wuerfelArray[1] = &head;
-        wuerfelArray[2] = &leftArm1;
-        wuerfelArray[3] = &leftArm2;
-        wuerfelArray[4] = &rightArm1;
-        wuerfelArray[5] = &rightArm2;
-        wuerfelArray[6] = &leftLeg;
-        wuerfelArray[7] = &rightLeg;
-        wuerfelArray[8] = &hat1;
-        wuerfelArray[0] = &hat2;
-        //
 
         // body
         //
@@ -42,11 +34,11 @@ public:
         //
         // left arm
         //
-        leftArm1 = Wuerfel(0.25,0.1,0.1,    1,1,1,  -0.325,0.2,0,    0,0,0,0);
+        leftArm1 = Wuerfel(0.25,0.1,0.1,    1,1,1,  0,0.0,0,    0,0,0,0);
         //
         // left under arm
         //
-        leftArm2 = Wuerfel(0.25,0.1,0.1,    1,1,1,  -0.625,0.2,0,    0,0,0,0);
+        leftArm2 = Wuerfel(0.25,0.1,0.1,    1,1,1,  -0.3,0.0,0,    0,0,0,0);
 
         //
         // right leg
@@ -59,14 +51,21 @@ public:
         //
         // hat
         //
+        /*
         hat1 = Wuerfel(0.3,0.1,0.1,    1,1,1,  0,0.65,0,    0,0,0,0);
         hat2 = Wuerfel(0.1,0.15,0.1,    1,1,1,  0,0.75,0,    0,0,0,0);
-
+        */
     }
     void createRobot() {
         //
         // body
         //
+        glPushMatrix();
+        glRotatef(robotRotate[0],robotRotate[1],robotRotate[2],robotRotate[3]);
+        glScalef(robotScale[0],robotScale[1],robotScale[2]);
+        glTranslatef(robotTranslate[0],robotTranslate[1],robotTranslate[2]);
+        creatLeftLeg();
+        createRightLeg();
         body = Wuerfel(
                 body.seitenLx,body.seitenLy,body.seitenLz,
                 body.scaleX,body.scaleY,body.scaleZ,
@@ -82,9 +81,86 @@ public:
                 head.translX,head.translY,head.translZ,
                 head.rotateAngle,head.rotateX,head.rotateY,head.rotateZ
         ); head.create();
+
+        createRightArm();
+        createLeftArm();
+
+        //
+        // leftLeg
+        //
+
+        //
+        // hat
+        //
+        hat1 = Wuerfel(
+                hat1.seitenLx,hat1.seitenLy,hat1.seitenLz,
+                hat1.scaleX,hat1.scaleY,hat1.scaleZ,
+                hat1.translX,hat1.translY,hat1.translZ,
+                hat1.rotateAngle,hat1.rotateX,hat1.rotateY,hat1.rotateZ
+        ); hat1.create();
+        hat2 = Wuerfel(
+                hat2.seitenLx,hat2.seitenLy,hat2.seitenLz,
+                hat2.scaleX,hat2.scaleY,hat2.scaleZ,
+                hat2.translX,hat2.translY,hat2.translZ,
+                hat2.rotateAngle,hat2.rotateX,hat2.rotateY,hat2.rotateZ
+        ); hat2.create();
+        glPopMatrix();
+    }
+    void walk() {
+        rotateLeftLeg(walkCounter, 0, 0, 0);
+        rotateRightLeg(-walkCounter, 0, 0, 0);
+        if (walkForward) {
+         ++walkCounter;
+        } else {
+            --walkCounter;
+        }
+        if (walkForward) {
+            if (walkCounter > 35) {
+                walkForward = false;
+            }
+        } else {
+            if (walkCounter <  (-35)) {
+                walkForward = true;
+            }
+        }
+    }
+    void animateArms() {
+
+    }
+    void creatLeftLeg() {
+        glPushMatrix();
+        glTranslatef(leftLegTranslate[0],leftLegTranslate[1],leftLegTranslate[2]);
+        glRotatef(leftLegRotate[0],leftLegRotate[1],leftLegRotate[2],leftLegRotate[3]);
+        glScalef(leftLegScale[0],leftLegScale[1],leftLegScale[2]);
+        leftLeg = Wuerfel(
+                leftLeg.seitenLx,leftLeg.seitenLy,leftLeg.seitenLz,
+                leftLeg.scaleX,leftLeg.scaleY,leftLeg.scaleZ,
+                leftLeg.translX,leftLeg.translY,leftLeg.translZ,
+                leftLeg.rotateAngle,leftLeg.rotateX,leftLeg.rotateY,leftLeg.rotateZ
+        ); leftLeg.create();
+        glPopMatrix();
+    }
+    void createRightLeg() {
+        glPushMatrix();
+        glTranslatef(rightLegTranslate[0],rightLegTranslate[1],rightLegTranslate[2]);
+        glRotatef(rightLegRotate[0],rightLegRotate[1],rightLegRotate[2],rightLegRotate[3]);
+        glScalef(rightLegScale[0],rightLegScale[1],rightLegScale[2]);
+        rightLeg = Wuerfel(
+                rightLeg.seitenLx,rightLeg.seitenLy,rightLeg.seitenLz,
+                rightLeg.scaleX,rightLeg.scaleY,rightLeg.scaleZ,
+                rightLeg.translX,rightLeg.translY,rightLeg.translZ,
+                rightLeg.rotateAngle,rightLeg.rotateX,rightLeg.rotateY,rightLeg.rotateZ
+        ); rightLeg.create();
+        glPopMatrix();
+    }
+    void createLeftArm() {
         //
         // leftArm1
         //
+        glPushMatrix();
+        glTranslatef(leftArmTranslate[0],leftArmTranslate[1],leftArmTranslate[2]);
+        glRotatef(leftArmRotate[0],leftArmRotate[1],leftArmRotate[2],leftArmRotate[3]);
+        glScalef(leftArmScale[0],leftArmScale[1],leftArmScale[2]);
         leftArm1 = Wuerfel(
                 leftArm1.seitenLx,leftArm1.seitenLy,leftArm1.seitenLz,
                 leftArm1.scaleX,leftArm1.scaleY,leftArm1.scaleZ,
@@ -100,6 +176,13 @@ public:
                 leftArm2.translX,leftArm2.translY,leftArm2.translZ,
                 leftArm2.rotateAngle,leftArm2.rotateX,leftArm2.rotateY,leftArm2.rotateZ
         ); leftArm2.create();
+        glPopMatrix();
+    }
+    void createRightArm() {
+        glPushMatrix();
+        glRotatef(rightArmRotate[0],rightArmRotate[1],rightArmRotate[2],rightArmRotate[3]);
+        glScalef(rightArmScale[0],rightArmScale[1],rightArmScale[2]);
+        glTranslatef(rightArmTranslate[0],rightArmTranslate[1],rightArmTranslate[2]);
         //
         // rightArm1
         //
@@ -118,55 +201,70 @@ public:
                 rightArm2.translX,rightArm2.translY,rightArm2.translZ,
                 rightArm2.rotateAngle,rightArm2.rotateX,rightArm2.rotateY,rightArm2.rotateZ
         ); rightArm2.create();
-        //
-        // leftLeg
-        //
-        leftLeg = Wuerfel(
-                leftLeg.seitenLx,leftLeg.seitenLy,leftLeg.seitenLz,
-                leftLeg.scaleX,leftLeg.scaleY,leftLeg.scaleZ,
-                leftLeg.translX,leftLeg.translY,leftLeg.translZ,
-                leftLeg.rotateAngle,leftLeg.rotateX,leftLeg.rotateY,leftLeg.rotateZ
-        ); leftLeg.create();
-        //
-        // rightLeg
-        //
-        rightLeg = Wuerfel(
-                rightLeg.seitenLx,rightLeg.seitenLy,rightLeg.seitenLz,
-                rightLeg.scaleX,rightLeg.scaleY,rightLeg.scaleZ,
-                rightLeg.translX,rightLeg.translY,rightLeg.translZ,
-                rightLeg.rotateAngle,rightLeg.rotateX,rightLeg.rotateY,rightLeg.rotateZ
-        ); rightLeg.create();
-        //
-        // hat
-        //
-        hat1 = Wuerfel(
-                hat1.seitenLx,hat1.seitenLy,hat1.seitenLz,
-                hat1.scaleX,hat1.scaleY,hat1.scaleZ,
-                hat1.translX,hat1.translY,hat1.translZ,
-                hat1.rotateAngle,hat1.rotateX,hat1.rotateY,hat1.rotateZ
-        ); hat1.create();
-        hat2 = Wuerfel(
-                hat2.seitenLx,hat2.seitenLy,hat2.seitenLz,
-                hat2.scaleX,hat2.scaleY,hat2.scaleZ,
-                hat2.translX,hat2.translY,hat2.translZ,
-                hat2.rotateAngle,hat2.rotateX,hat2.rotateY,hat2.rotateZ
-        ); hat2.create();
+        glPopMatrix();
+    }
+    void scaleRobot(double x,double y,double z) {
+        robotScale[2] = z;
+        robotScale[1] = y;
+        robotScale[0] = x;
+    }
+    void rotateRobot(double x,double y,double z, double v) {
+        robotRotate[0] = v;
+        robotRotate[1] = x;
+        robotRotate[2] = y;
+        robotRotate[3] = z;
     }
     void rotateLeftLeg(double ang, double xx, double yy, double zz) {
-        leftLeg.rotate(ang,xx,yy,zz);
+        leftLegRotate[0] = ang;
+        leftLegRotate[1] = xx;
+        leftLegRotate[2] = yy;
+        leftLegRotate[3] = zz;
     }
     void rotateRightLeg(double ang, double xx, double yy, double zz) {
-        rightLeg.rotate(ang, xx, yy, zz);
+        /*
+        double x,y,z;
+        x = rightLeg.translX;
+        y = rightLeg.translY;
+        z = rightLeg.translZ;
+        rightLeg.translate(0,-0.35,0);
+        rightLeg.rotate(ang,xx,yy,zz);
+        rightLeg.translate(x,y,z);
+         */
+        rightLegRotate[0] = ang;
+        rightLegRotate[1] = xx;
+        rightLegRotate[2] = yy;
+        rightLegRotate[3] = zz;
     }
     void rotateBody(double ang, double xx, double yy, double zz) {
         body.rotate(ang, xx, yy, zz);
     }
     void rotateHead(double ang, double xx, double yy, double zz) {
-        head.rotate(ang, xx, yy, zz);
+
+        head.rotateAngle = ang;
+        head.rotateX = xx;
+        head.rotateY = yy;
+        head.rotateZ = zz;
+
+
+    }
+    void translateLeftArm(double x, double y, double z) {
+        leftArmTranslate[0] = x;
+        leftArmTranslate[1] = y;
+        leftArmTranslate[2] = z;
     }
     void rotateLeftArm(double ang, double xx, double yy, double zz) {
-        leftArm1.rotate(ang, xx, yy, zz);
-        leftArm2.rotate(ang, xx, yy, zz);
+        double x,y,z,v;
+        v = leftArmRotate[0];
+        x = leftArmTranslate[0];
+        y = leftArmTranslate[1];
+        z = leftArmTranslate[2];
+        translateLeftArm(0,0,0);
+        leftArmRotate[0] = ang;
+        leftArmRotate[1] = xx;
+        leftArmRotate[2] = yy;
+        leftArmRotate[3] = zz;
+        translateLeftArm(x,y,z);
+
     }
     void rotateRightArm(double ang, double xx, double yy, double zz) {
         rightArm1.rotate(ang, xx, yy, zz);
@@ -177,6 +275,7 @@ public:
         hat2.rotate(ang, xx, yy, zz);
     }
 
+    /*
     void rotateRobot(
             double rotateAngle,double rotateX, double rotateY, double rotateZ
             ) {
@@ -187,10 +286,30 @@ public:
         rotateRightArm(rotateAngle, rotateX,  rotateY,  rotateZ);
         rotateHat(rotateAngle, rotateX,  rotateY,  rotateZ);
         rotateHead(rotateAngle, rotateX,  rotateY,  rotateZ);
-    }
+    }*/
     void clearLeftLeg(){
         leftLeg.clear();
     }
+    double robotScale[3] = {1,1,1};
+    double robotTranslate[3] = {0,0,0};
+    double robotRotate[4] = {0,0,0,0};
+
+    double leftArmScale[3] = {1,1,1};
+    double leftArmTranslate[3] = {-0.325,0.2,0};
+    double leftArmRotate[4] = {0,0,0,0};
+
+    double rightArmScale[3] = {1,1,1};
+    double rightArmTranslate[3] = {0.0,0.0,0};
+    double rightArmRotate[4] = {0,0,0,0};
+
+    double leftLegScale[3] = {1,1,1};
+    double leftLegTranslate[3] = {0.0,0.0,0};
+    double leftLegRotate[4] = {0,0,0,0};
+
+    double rightLegScale[3] = {1,1,1};
+    double rightLegTranslate[3] = {0.0,0.0,0};
+    double rightLegRotate[4] = {0,0,0,0};
+
 private:
     Wuerfel body, head, leftArm1, leftArm2, rightArm1, rightArm2, leftLeg, rightLeg, hat1, hat2;
     Wuerfel* wuerfelArray[10];

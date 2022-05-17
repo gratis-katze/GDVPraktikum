@@ -47,10 +47,9 @@ class Wuerfel {
         GLfloat z = seitenLz / 2.0f;
 
         glPushMatrix();
+        glTranslatef(translX,translY,translZ);
         glRotatef(rotateAngle,rotateX,rotateY,rotateZ);
         glScalef(scaleX,scaleY,scaleZ);
-        glTranslatef(translX,translY,translZ);
-
 
         glBegin(GL_POLYGON);   //Vorderseite
         glColor4f(1.0f,0.0f,0.0f,1.0f);	//ROT
@@ -168,6 +167,11 @@ class Wuerfel {
             rotateX = x;
             rotateY = y;
             rotateZ = z;
+        }
+        void translate(double x,double y,double z) {
+            translX = x;
+            translY = y;
+            translZ = z;
         }
         GLfloat seitenLx;GLfloat seitenLy;GLfloat seitenLz;double scaleX;double scaleY;double scaleZ;
         double translX;double translY;double translZ;double rotateAngle;double rotateX;double rotateY;double rotateZ;
