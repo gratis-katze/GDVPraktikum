@@ -39,13 +39,19 @@ void Animate (int value)
     // inkrementiert und dem Callback wieder uebergeben.
     std::cout << "value=" << value << std::endl;
 
-    herbie.rotateLeftLeg(45,0,0,0);
+    herbie.rotateRightArm(value,0,0,1);
+    //herbie.rotateRobot(value,0,0,0);
 
     // RenderScene aufrufen
     glutPostRedisplay();
     // Timer wieder registrieren - Animate wird so nach 10 msec mit value+=1 aufgerufen.
     int wait_msec = 10;
     glutTimerFunc(wait_msec, Animate, ++value);
+}
+void Reshape(int width,int height)
+{
+    // Hier finden die Reaktionen auf eine Veränderung der Größe des
+    // Graphikfensters statt
 }
 int main(int argc, char **argv)
 {
@@ -54,16 +60,13 @@ int main(int argc, char **argv)
     glutInitWindowSize( 600, 600 );         // Fenster-Konfiguration
     glutCreateWindow( "KonradMucha; FelixRuff" );   // Fenster-Erzeugung
     glutDisplayFunc( RenderScene );         // Zeichenfunktion bekannt machen
-    Init();
-
-    //glutReshapeFunc( Reshape );
+    glutReshapeFunc( Reshape );
     // TimerCallback registrieren; wird nach 10 msec aufgerufen mit Parameter 0
-    //glutTimerFunc( 10, Animate, 0);
-
+    glutTimerFunc( 10, Animate, 0);
+    Init();
     glutMainLoop();
     return 0;
 }
-
 
 
 
@@ -274,9 +277,4 @@ void createRobot() {
     //
 
 
-}
-void Reshape(int width,int height)
-{
-    // Hier finden die Reaktionen auf eine Veränderung der Größe des
-    // Graphikfensters statt
 }

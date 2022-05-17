@@ -164,12 +164,10 @@ class Wuerfel {
             rotateZ = tmp.at(12);
         }
         void rotate(double angle,double x,double y,double z) {
-            //clear();
             rotateAngle = angle;
             rotateX = x;
             rotateY = y;
             rotateZ = z;
-            //create();
         }
         GLfloat seitenLx;GLfloat seitenLy;GLfloat seitenLz;double scaleX;double scaleY;double scaleZ;
         double translX;double translY;double translZ;double rotateAngle;double rotateX;double rotateY;double rotateZ;

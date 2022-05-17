@@ -11,7 +11,18 @@
 class Robot {
 public:
     Robot() {
+        wuerfelArray[0] = &body;
+        wuerfelArray[1] = &head;
+        wuerfelArray[2] = &leftArm1;
+        wuerfelArray[3] = &leftArm2;
+        wuerfelArray[4] = &rightArm1;
+        wuerfelArray[5] = &rightArm2;
+        wuerfelArray[6] = &leftLeg;
+        wuerfelArray[7] = &rightLeg;
+        wuerfelArray[8] = &hat1;
+        wuerfelArray[0] = &hat2;
         //
+
         // body
         //
         body = Wuerfel(0.3,0.6,0.1,    1,1,1,  0,0,0,    0,0,0,0);
@@ -144,11 +155,45 @@ public:
     void rotateLeftLeg(double ang, double xx, double yy, double zz) {
         leftLeg.rotate(ang,xx,yy,zz);
     }
+    void rotateRightLeg(double ang, double xx, double yy, double zz) {
+        rightLeg.rotate(ang, xx, yy, zz);
+    }
+    void rotateBody(double ang, double xx, double yy, double zz) {
+        body.rotate(ang, xx, yy, zz);
+    }
+    void rotateHead(double ang, double xx, double yy, double zz) {
+        head.rotate(ang, xx, yy, zz);
+    }
+    void rotateLeftArm(double ang, double xx, double yy, double zz) {
+        leftArm1.rotate(ang, xx, yy, zz);
+        leftArm2.rotate(ang, xx, yy, zz);
+    }
+    void rotateRightArm(double ang, double xx, double yy, double zz) {
+        rightArm1.rotate(ang, xx, yy, zz);
+        rightArm2.rotate(ang, xx, yy, zz);
+    }
+    void rotateHat(double ang, double xx, double yy, double zz) {
+        hat1.rotate(ang, xx, yy, zz);
+        hat2.rotate(ang, xx, yy, zz);
+    }
+
+    void rotateRobot(
+            double rotateAngle,double rotateX, double rotateY, double rotateZ
+            ) {
+        rotateBody(rotateAngle, rotateX,  rotateY,  rotateZ);
+        rotateLeftLeg(rotateAngle, rotateX,  rotateY,  rotateZ);
+        rotateRightLeg(rotateAngle, rotateX,  rotateY,  rotateZ);
+        rotateLeftArm(rotateAngle, rotateX,  rotateY,  rotateZ);
+        rotateRightArm(rotateAngle, rotateX,  rotateY,  rotateZ);
+        rotateHat(rotateAngle, rotateX,  rotateY,  rotateZ);
+        rotateHead(rotateAngle, rotateX,  rotateY,  rotateZ);
+    }
     void clearLeftLeg(){
         leftLeg.clear();
     }
 private:
     Wuerfel body, head, leftArm1, leftArm2, rightArm1, rightArm2, leftLeg, rightLeg, hat1, hat2;
+    Wuerfel* wuerfelArray[10];
 
 };
 
