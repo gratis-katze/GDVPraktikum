@@ -38,7 +38,7 @@ public:
         //
         // left forearm
         //
-        leftArm2 = Wuerfel(0.3,0.1,0.1,    1,1,1,  -0.4,0.0,0,    0,0,0,0);
+        leftArm2 = Wuerfel(0.3,0.1,0.1,    1,1,1,  -0.15,0.0,0,    0,0,0,0);
 
         //
         // right leg
@@ -124,11 +124,6 @@ public:
             }
         }
     }
-    void animateArms(double i, double x, double y, double z) {
-       // translateLeftArmInner(leftArm1.seitenLx,0,0);
-        rotateLeftArm(i,x,y,z);
-        //translateLeftArmInner(+(leftArm1.seitenLx/2),0,0);
-    }
     void creatLeftLeg() {
         glPushMatrix();
         glTranslatef(leftLegTranslate[0],leftLegTranslate[1],leftLegTranslate[2]);
@@ -172,12 +167,16 @@ public:
         //
         // leftArm2
         //
+        glPushMatrix();
+        glTranslatef(leftForearmTranslateArray[0],leftForearmTranslateArray[1],leftForearmTranslateArray[2]);
+        glRotatef(leftForearmRotateArray[0],leftForearmRotateArray[1],leftForearmRotateArray[2],leftForearmRotateArray[3]);
         leftArm2 = Wuerfel(
                 leftArm2.seitenLx,leftArm2.seitenLy,leftArm2.seitenLz,
                 leftArm2.scaleX,leftArm2.scaleY,leftArm2.scaleZ,
                 leftArm2.translX,leftArm2.translY,leftArm2.translZ,
                 leftArm2.rotateAngle,leftArm2.rotateX,leftArm2.rotateY,leftArm2.rotateZ
         ); leftArm2.create();
+        glPopMatrix();
         glPopMatrix();
     }
     void createRightArm() {
@@ -206,6 +205,7 @@ public:
                 rightArm2.translX,rightArm2.translY,rightArm2.translZ,
                 rightArm2.rotateAngle,rightArm2.rotateX,rightArm2.rotateY,rightArm2.rotateZ
         ); rightArm2.create();
+        glPopMatrix();
         glPopMatrix();
     }
     void scaleRobot(double x,double y,double z) {
@@ -258,64 +258,23 @@ public:
 
 
     }
-    void translateLeftArm(double x, double y, double z) {
-        leftArmTranslate[0] = x;
-        leftArmTranslate[1] = y;
-        leftArmTranslate[2] = z;
-    }
-    void translateLeftArmInner(double x, double y, double z) { // verschiebt innerhalb des eigenen koord.
-        leftArm1.translX = x;
-        leftArm1.translY = y;
-        leftArm1.translZ = z;
-        leftArm2.translX = x;
-        leftArm2.translY = y;
-        leftArm2.translZ = z;
-    }
-    /*void rotateLeftArm(double ang, double xx, double yy, double zz) {
-        double x,y,z,v;
-        v = leftArmRotate[0];
-        x = leftArmTranslate[0];
-        y = leftArmTranslate[1];
-        z = leftArmTranslate[2];
-        translateLeftArm(0,0,0);
-        leftArmRotate[0] = ang;
-        leftArmRotate[1] = xx;
-        leftArmRotate[2] = yy;
-        leftArmRotate[3] = zz;
-        translateLeftArm(x,y,z);
-
-    }*/
     void rotateRightArm(double ang, double xx, double yy, double zz) {
         rightArmRotate[0] = ang;
         rightArmRotate[1] = xx;
         rightArmRotate[2] = yy;
         rightArmRotate[3] = zz;
     }
-    void rotateHat(double ang, double xx, double yy, double zz) {
-        hat1.rotate(ang, xx, yy, zz);
-        hat2.rotate(ang, xx, yy, zz);
-    }
-
     void rightForearmRotate(double ang, double xx, double yy, double zz) {
         rightForearmRotateArray[1] = xx;
         rightForearmRotateArray[2] = yy;
         rightForearmRotateArray[3] = zz;
         rightForearmRotateArray[0] = ang;
     }
-    /*
-    void rotateRobot(
-            double rotateAngle,double rotateX, double rotateY, double rotateZ
-            ) {
-        rotateBody(rotateAngle, rotateX,  rotateY,  rotateZ);
-        rotateLeftLeg(rotateAngle, rotateX,  rotateY,  rotateZ);
-        rotateRightLeg(rotateAngle, rotateX,  rotateY,  rotateZ);
-        rotateLeftArm(rotateAngle, rotateX,  rotateY,  rotateZ);
-        rotateRightArm(rotateAngle, rotateX,  rotateY,  rotateZ);
-        rotateHat(rotateAngle, rotateX,  rotateY,  rotateZ);
-        rotateHead(rotateAngle, rotateX,  rotateY,  rotateZ);
-    }*/
-    void clearLeftLeg(){
-        leftLeg.clear();
+    void leftForearmRotate(double ang, double xx, double yy, double zz) {
+        leftForearmRotateArray[1] = xx;
+        leftForearmRotateArray[2] = yy;
+        leftForearmRotateArray[3] = zz;
+        leftForearmRotateArray[0] = ang;
     }
     double robotScale[3] = {1,1,1};
     double robotTranslate[3] = {0,0,0};
@@ -330,6 +289,10 @@ public:
     double rightArmRotate[4] = {0,0,0,0};
     double rightForearmRotateArray[4] = {0,0,0,0};
     double rightForearmTranslateArray[3] = {0.25,0,0};
+
+    double leftForearmTranslateArray[3] = {-0.25,0,0};
+    double leftForearmRotateArray[4] = {0,0,0,0};
+
     double leftLegScale[3] = {1,1,1};
     double leftLegTranslate[3] = {0.0,0.0,0};
     double leftLegRotate[4] = {0,0,0,0};
@@ -340,8 +303,6 @@ public:
 
 private:
     Wuerfel body, head, leftArm1, leftArm2, rightArm1, rightArm2, leftLeg, rightLeg, hat1, hat2;
-    Wuerfel* wuerfelArray[10];
-
 };
 
 

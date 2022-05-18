@@ -47,29 +47,14 @@ void Animate (int value)
     // inkrementiert und dem Callback wieder uebergeben.
     std::cout << "value=" << value << std::endl;
 
-    //herbie.rotateLeftLeg(value,0,0,0);
     herbie.walk();
     herbie.rotateHead(value,0,1,0);
-    herbie.animateArms(value,0,0,1);
+    herbie.rotateLeftArm(value,0.35,-0.5,0.2);
     herbie.rotateRightArm(value,-0.3,0.3,1);
-    herbie.rightForearmRotate(value,0.2,0.3,1);
-    /*
-    if ( tmp == 0 ) {
-        tmps[0] = herbie.leftArmTranslate[0];
-        tmps[1] = herbie.leftArmTranslate[1];
-        tmps[2] = herbie.leftArmTranslate[2];
-        herbie.translateLeftArm(0,0,0);
-    }
-    if ( tmp == 1 ) {
-        herbie.rotateLeftArm(value,0,0,0);
-    }
-    if ( tmp == 2 ) {
-        herbie.translateLeftArm(tmps[0],tmps[1],tmps[2]);
-    }
-    ++tmp;
-    if (tmp > 2) {
-        tmp = 0;
-    }*/
+    herbie.rightForearmRotate(value,0.2,0.3,0.9);
+    herbie.leftForearmRotate(value,-0.4,0.8,-0.3);
+
+
     // RenderScene aufrufen
     glutPostRedisplay();
     // Timer wieder registrieren - Animate wird so nach 10 msec mit value+=1 aufgerufen.
