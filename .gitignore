@@ -3,6 +3,7 @@
 
 
 
+
 Compiled Object files
 *.slo
 *.lo
@@ -14,7 +15,9 @@ Compiled Object files
 .gitignore.swp
 .idea/
 
-
+cmake-build-debug/.ninja_deps
+cmake-build-debug/.ninja_log
+cmake-build-debug/Testing/Temporary/LastTest.log
 
 
 # Precompiled Headers

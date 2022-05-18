@@ -50,7 +50,9 @@ void Animate (int value)
     //herbie.rotateLeftLeg(value,0,0,0);
     herbie.walk();
     herbie.rotateHead(value,0,1,0);
-    herbie.rotateLeftArm(value,0,0,1);
+    herbie.animateArms(value,0,0,1);
+    herbie.rotateRightArm(value,-0.3,0.3,1);
+    herbie.rightForearmRotate(value,0.2,0.3,1);
     /*
     if ( tmp == 0 ) {
         tmps[0] = herbie.leftArmTranslate[0];
