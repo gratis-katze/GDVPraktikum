@@ -11,7 +11,6 @@
 class Robot {
     int walkCounter = 0;
     bool walkForward = true;
-
 public:
     Robot() {
 
@@ -276,6 +275,7 @@ public:
         leftForearmRotateArray[3] = zz;
         leftForearmRotateArray[0] = ang;
     }
+
     double robotScale[3] = {1,1,1};
     double robotTranslate[3] = {0,0,0};
     double robotRotate[4] = {0,0,0,0};

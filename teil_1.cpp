@@ -8,13 +8,7 @@
 #include <GLUT/glut.h>
 #include "Wuerfel.h"
 #include "Robot.h"
-
 Robot herbie = Robot();
-Wuerfel test = Wuerfel(0.2,0.2,0.2, 0.5,0.5,0.5,  0,0,0,  0,0,0,0);
-Wuerfel test2 = Wuerfel(0.2,0.2,0.2, 1,1,1,  0.5,0,0,  0,0,0,0);
-int tmp = 0;
-double tmps[3];
-
 void Init()
 {
     // Hier finden jene Aktionen statt, die zum Progammstart einmalig
@@ -24,19 +18,15 @@ void Init()
     glCullFace ( GL_BACK ) ;
 }
 void RenderScene() {
-
     //glClearColor(1.0, 1.0, 0.0, 1.0); //->zuerst Fearben .. dann ausfuehren
     glClear(GL_COLOR_BUFFER_BIT);
     // Hier befindet sich der Code der in jedem Frame ausgefuehrt werden muss
     glLoadIdentity ();   // Aktuelle Model-/View-Transformations-Matrix zuruecksetzen
     gluPerspective(1,1,1,1);
     gluLookAt(0.1,0.1,0.5,0,0.0,0.0,0,0.1,0);
+
     herbie.createRobot();
-    herbie.rotateRobot(0.0,0,0,5);
-    //glScalef(0.6,0.6,0.6);
-    //glPushMatrix();
-    //test.create();test2.create();
-    //glPopMatrix();
+    //herbie.rotateRobot(l,0,0,5);
     glutSwapBuffers();
 }
 void Animate (int value)
@@ -53,6 +43,8 @@ void Animate (int value)
     herbie.rotateRightArm(value,-0.3,0.3,1);
     herbie.rightForearmRotate(value,0.2,0.3,0.9);
     herbie.leftForearmRotate(value,-0.4,0.8,-0.3);
+
+    herbie.rotateRobot(0,1,0,value/2);
 
 
     // RenderScene aufrufen
@@ -80,9 +72,6 @@ int main(int argc, char **argv)
     glutMainLoop();
     return 0;
 }
-
-
-
 void createFelix(){
     //F
     glBegin(GL_TRIANGLES);
@@ -240,54 +229,6 @@ void createKonrad() {
     glVertex3f(-0.3, -0.17, -0.5);
     glVertex3f(-0.2, -0.17, -0.5);
     glEnd();
-
-
-}
-void createRobot() {
-    //gluOrtho2D(-10,10,-10,10); // not needed!?
-
-    //
-    // body
-    //
-    Wuerfel body = Wuerfel(0.3,0.6,0.1,    1,1,1,  0,0,0,    0,0,0,0);
-    //
-    // head
-    //
-    Wuerfel head = Wuerfel(0.2,0.2,0.2,    1,1,1,  0,0.45,0,    0,0,0,0);
-
-    //
-    // right arm
-    //
-    Wuerfel(0.25,0.1,0.1,    1,1,1,  0.325,0.2,0,    0,0,0,0);
-    //
-    // right under arm
-    //
-    Wuerfel(0.25,0.1,0.1,    1,1,1,  0.625,0.2,0,    0,0,0,0);
-    //
-    // left arm
-    //
-    Wuerfel(0.25,0.1,0.1,    1,1,1,  -0.325,0.2,0,    0,0,0,0);
-    //
-    // left under arm
-    //
-    Wuerfel(0.25,0.1,0.1,    1,1,1,  -0.625,0.2,0,    0,0,0,0);
-
-    //
-    // right leg
-    //
-    Wuerfel(0.1,0.35,0.1,    1,1,1,  0.1,-0.525,0,    0,0,0,0);
-    //
-    // left leg
-    //
-    Wuerfel(0.1,0.35,0.1,    1,1,1,  -0.1,-0.525,0,    0,0,0,0);
-    //
-    // hat
-    //
-    Wuerfel(0.3,0.1,0.1,    1,1,1,  0,0.65,0,    0,0,0,0);
-    Wuerfel(0.1,0.15,0.1,    1,1,1,  0,0.75,0,    0,0,0,0);
-
-
-    //
 
 
 }

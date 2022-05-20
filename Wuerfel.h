@@ -7,7 +7,6 @@
 #define GDV_WUERFEL_H
 
 class Wuerfel {
-
     public:
         Wuerfel(){
             seitenLx = 0;
@@ -125,43 +124,6 @@ class Wuerfel {
 
         return;
     }
-        void clear() {
-            std::vector<double> tmp{};
-            tmp.push_back(seitenLx);tmp.push_back(seitenLy);
-            tmp.push_back(seitenLz);tmp.push_back(scaleX);
-            tmp.push_back(scaleY);tmp.push_back(scaleZ);
-            tmp.push_back(translX);tmp.push_back(translY);
-            tmp.push_back(translZ);tmp.push_back(rotateAngle);
-            tmp.push_back(rotateX);tmp.push_back(rotateY);
-            tmp.push_back(rotateZ);
-            seitenLx = 0;
-            seitenLy = 0;
-            seitenLz = 0;
-            scaleX = 0;
-            scaleY = 0;
-            scaleZ = 0;
-            translX = 0;
-            translY = 0;
-            translZ = 0;
-            rotateAngle = 0;
-            rotateX = 0;
-            rotateY = 0;
-            rotateZ = 0;
-            create();
-            seitenLx = tmp.at(0);
-            seitenLy = tmp.at(1);
-            seitenLz = tmp.at(2);
-            scaleX = tmp.at(3);
-            scaleY = tmp.at(4);
-            scaleZ = tmp.at(5);
-            translX = tmp.at(6);
-            translY = tmp.at(7);
-            translZ = tmp.at(8);
-            rotateAngle = tmp.at(9);
-            rotateX = tmp.at(10);
-            rotateY = tmp.at(11);
-            rotateZ = tmp.at(12);
-        }
         void rotate(double angle,double x,double y,double z) {
             rotateAngle = angle;
             rotateX = x;
